@@ -1,0 +1,6 @@
+id=${moduleId}
+name=dex2oat
+version=${versionName} (${versionCode})
+versionCode=${versionCode}
+author=Nullptr
+description=Fix art parameter. Requires Magisk 24.0+ and Zygisk enabled
