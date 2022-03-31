@@ -3,4 +3,4 @@ name=dex2oat
 version=${versionName} (${versionCode})
 versionCode=${versionCode}
 author=Nullptr
-description=Fix art parameter. Requires Magisk 24.3+ and Zygisk enabled
+description=Fix ART parameters. Requires Magisk 24.3+

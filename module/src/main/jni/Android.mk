@@ -14,10 +14,4 @@ LOCAL_STATIC_LIBRARIES := cxx
 LOCAL_LDLIBS           := -llog
 include $(BUILD_EXECUTABLE)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE           := inject
-LOCAL_SRC_FILES        := zygisk.cpp
-LOCAL_STATIC_LIBRARIES := cxx
-include $(BUILD_SHARED_LIBRARY)
-
 $(call import-module,prefab/cxx)

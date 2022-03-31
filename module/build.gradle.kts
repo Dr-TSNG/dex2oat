@@ -69,7 +69,7 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
                 "versionCode" to verCode,
             )
         }
-        into("lib") {
+        into("bin") {
             from("$buildDir/intermediates/ndkbuild/$variantLowered/obj/local")
         }
 

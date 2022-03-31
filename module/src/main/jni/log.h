@@ -5,7 +5,7 @@
 #include <cstring>
 
 #ifndef LOG_TAG
-#define LOG_TAG    "zygisk_dex2oat"
+#define LOG_TAG    "icu.nullptr.dex2oat"
 #endif
 
 #define quote(s)         #s

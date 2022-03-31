@@ -9,9 +9,8 @@ enforce_install_from_magisk_app() {
   else
     ui_print "*********************************************************"
     ui_print "! Install from recovery is NOT supported"
-    ui_print "! Some recovery has broken implementations, install with such recovery will finally cause Riru or Riru modules not working"
     ui_print "! Please install from Magisk app"
-    abort "*********************************************************"
+    abort    "*********************************************************"
   fi
 }
 
@@ -25,7 +24,7 @@ if [ ! -f "$TMPDIR/verify.sh" ]; then
   ui_print "*********************************************************"
   ui_print "! Unable to extract verify.sh!"
   ui_print "! This zip may be corrupted, please try downloading again"
-  abort "*********************************************************"
+  abort    "*********************************************************"
 fi
 . "$TMPDIR/verify.sh"
 
@@ -45,55 +44,42 @@ else
   ui_print "- Device platform: $ARCH"
 fi
 
-# Extract libs
+# Extract files
 ui_print "- Extracting module files"
 
 extract "$ZIPFILE" 'module.prop' "$MODPATH"
 extract "$ZIPFILE" 'post-fs-data.sh' "$MODPATH"
 extract "$ZIPFILE" 'sepolicy.rule' "$MODPATH"
 
-ui_print "- Extracting libraries"
+ui_print "- Extracting binaries"
 
 mkdir -p "$MODPATH/bin"
-mkdir -p "$MODPATH/zygisk"
 
 if [ "$ARCH" = "arm" ] ; then
-  extract "$ZIPFILE" 'lib/armeabi-v7a/dex2oatd' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'bin/armeabi-v7a/dex2oatd' "$MODPATH/bin" true
 elif [ "$ARCH" = "arm64" ]; then
-  extract "$ZIPFILE" 'lib/arm64-v8a/dex2oatd' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'bin/arm64-v8a/dex2oatd' "$MODPATH/bin" true
 elif [ "$ARCH" = "x86" ]; then
-  extract "$ZIPFILE" 'lib/x86/dex2oatd' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'bin/x86/dex2oatd' "$MODPATH/bin" true
 elif [ "$ARCH" = "x64" ]; then
-  extract "$ZIPFILE" 'lib/x86_64/dex2oatd' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'bin/x86_64/dex2oatd' "$MODPATH/bin" true
 fi
 
 if [ "$ARCH" = "arm" ] || [ "$ARCH" = "arm64" ]; then
-  extract "$ZIPFILE" "lib/armeabi-v7a/dex2oat" "$MODPATH/bin" true
+  extract "$ZIPFILE" "bin/armeabi-v7a/dex2oat" "$MODPATH/bin" true
   mv "$MODPATH/bin/dex2oat" "$MODPATH/bin/dex2oat32"
 
-  extract "$ZIPFILE" "lib/armeabi-v7a/libinject.so" "$MODPATH/zygisk" true
-  mv "$MODPATH/zygisk/libinject.so" "$MODPATH/zygisk/armeabi-v7a.so"
-
   if [ "$IS64BIT" = true ]; then
-    extract "$ZIPFILE" "lib/arm64-v8a/dex2oat" "$MODPATH/bin" true
+    extract "$ZIPFILE" "bin/arm64-v8a/dex2oat" "$MODPATH/bin" true
     mv "$MODPATH/bin/dex2oat" "$MODPATH/bin/dex2oat64"
-
-    extract "$ZIPFILE" "lib/arm64-v8a/libinject.so" "$MODPATH/zygisk" true
-    mv "$MODPATH/zygisk/libinject.so" "$MODPATH/zygisk/arm64-v8a.so"
   fi
 elif [ "$ARCH" == "x86" ] || [ "$ARCH" == "x64" ]; then
-  extract "$ZIPFILE" "lib/x86/dex2oat" "$MODPATH/bin" true
+  extract "$ZIPFILE" "bin/x86/dex2oat" "$MODPATH/bin" true
   mv "$MODPATH/bin/dex2oat" "$MODPATH/bin/dex2oat32"
 
-  extract "$ZIPFILE" "lib/x86/libinject.so" "$MODPATH/zygisk" true
-  mv "$MODPATH/zygisk/libinject.so" "$MODPATH/zygisk/x86.so"
-
   if [ "$IS64BIT" = true ]; then
-    extract "$ZIPFILE" "lib/x86_64/dex2oat" "$MODPATH/bin" true
+    extract "$ZIPFILE" "bin/x86_64/dex2oat" "$MODPATH/bin" true
     mv "$MODPATH/bin/dex2oat" "$MODPATH/bin/dex2oat64"
-
-    extract "$ZIPFILE" "lib/x86_64/libinject.so" "$MODPATH/zygisk" true
-    mv "$MODPATH/zygisk/libinject.so" "$MODPATH/zygisk/x86_64.so"
   fi
 fi
 
