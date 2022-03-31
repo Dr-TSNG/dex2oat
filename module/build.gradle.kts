@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 30
+        minSdk = 28
         targetSdk = 32
         versionCode = verCode
         versionName = verName
