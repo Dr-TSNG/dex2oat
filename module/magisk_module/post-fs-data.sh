@@ -1,3 +1,3 @@
 MODDIR=${0%/*}
 
-"$MODDIR/bin/install"
+"$MODDIR/bin/dex2oatd"

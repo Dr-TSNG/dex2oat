@@ -1,2 +1,3 @@
 allow installd device sock_file { read write }
 allow installd magisk unix_stream_socket { connectto }
+allow zygote * filesystem { unmount }

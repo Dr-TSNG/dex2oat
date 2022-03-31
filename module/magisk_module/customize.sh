@@ -58,13 +58,13 @@ mkdir -p "$MODPATH/bin"
 mkdir -p "$MODPATH/zygisk"
 
 if [ "$ARCH" = "arm" ] ; then
-  extract "$ZIPFILE" 'lib/armeabi-v7a/install' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'lib/armeabi-v7a/dex2oatd' "$MODPATH/bin" true
 elif [ "$ARCH" = "arm64" ]; then
-  extract "$ZIPFILE" 'lib/arm64-v8a/install' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'lib/arm64-v8a/dex2oatd' "$MODPATH/bin" true
 elif [ "$ARCH" = "x86" ]; then
-  extract "$ZIPFILE" 'lib/x86/install' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'lib/x86/dex2oatd' "$MODPATH/bin" true
 elif [ "$ARCH" = "x64" ]; then
-  extract "$ZIPFILE" 'lib/x86_64/install' "$MODPATH/bin" true
+  extract "$ZIPFILE" 'lib/x86_64/dex2oatd' "$MODPATH/bin" true
 fi
 
 if [ "$ARCH" = "arm" ] || [ "$ARCH" = "arm64" ]; then
