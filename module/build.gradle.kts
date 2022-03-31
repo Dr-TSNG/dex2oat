@@ -1,11 +1,22 @@
 import org.apache.commons.codec.binary.Hex
+import java.io.ByteArrayOutputStream
 import java.security.MessageDigest
 
 plugins {
     id("com.android.application")
 }
 
-val verCode = 1
+fun String.execute(currentWorkingDir: File = file("./")): String {
+    val byteOut = ByteArrayOutputStream()
+    project.exec {
+        workingDir = currentWorkingDir
+        commandLine = split("\\s".toRegex())
+        standardOutput = byteOut
+    }
+    return String(byteOut.toByteArray()).trim()
+}
+
+val verCode = "git rev-list HEAD --count".execute().toInt()
 val verName = "1.0.0"
 val moduleId = "icu.nullptr.dex2oat"
 

@@ -17,7 +17,7 @@ void clean(int exit_code) {
 }
 
 int main(int argc, char** argv) {
-    LOGD("fake dex2oat");
+    LOGI("dex2oat wrapper");
     struct sockaddr_un sock {
             .sun_family = AF_UNIX
     };

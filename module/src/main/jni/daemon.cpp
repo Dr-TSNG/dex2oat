@@ -45,7 +45,7 @@ namespace {
         std::string dst = kTmpDir + "/dex2oat" + lp;
         std::string mnt = "/apex/com.android.art/bin/dex2oat" + lp;
 
-        LOGD("Patching %s -> %s", src.c_str(), dst.c_str());
+        LOGI("Patching %s -> %s", src.c_str(), dst.c_str());
         static char buf[51200];
         FILE* fp = fopen(src.c_str(), "rb");
         size_t len = fread(buf, 1, sizeof(buf), fp);
@@ -69,7 +69,7 @@ namespace {
 
     [[noreturn]]
     void Daemon(const std::string& lp, int stock_fd) {
-        LOGD("Daemon %s", lp.c_str());
+        LOGI("Daemon %s", lp.c_str());
         std::string sock_path = kTmpDir + "/dex2oat" + lp + ".sock";
         struct sockaddr_un sock {
                 .sun_family = AF_UNIX
@@ -99,7 +99,7 @@ int main() {
 #endif
 
     if (fork()) {
-        LOGD("Bootstrap complete");
+        LOGI("Bootstrap complete");
         return 0;
     } else {
         std::thread daemon32(Daemon, "32", stock32);

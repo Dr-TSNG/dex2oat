@@ -10,6 +10,5 @@ APP_CFLAGS     += -Oz -flto
 APP_CFLAGS     += -Wno-unused -Wno-unused-parameter -Werror
 APP_CFLAGS     += -fvisibility=hidden -fvisibility-inlines-hidden
 APP_CFLAGS     += -fno-unwind-tables -fno-asynchronous-unwind-tables
-APP_CFLAGS     += -mllvm -fla -mllvm -sub -mllvm -gle -mllvm -onlystr
 APP_LDFLAGS    += -Wl,--exclude-libs,ALL -flto -Wl,--gc-sections -Wl,--strip-all
 endif
